@@ -26,8 +26,8 @@ view: beacondtuniquevisits_hash {
     sql: ${TABLE}.siteid ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
+  measure: count_MatchedIndividuals {
+    type: sum
+    sql:  ${TABLE}.matchedhashcount ;;
   }
 }
