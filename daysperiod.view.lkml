@@ -1,5 +1,5 @@
-view: daypart {
-  sql_table_name: looker_pub1.daypart ;;
+view: daysperiod {
+  sql_table_name: looker_pub1.daysperiod ;;
 
   dimension: id {
     primary_key: yes

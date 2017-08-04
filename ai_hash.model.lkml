@@ -6,82 +6,139 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-explore: lookermart_hash {}
+explore: beacondtuniquevisits_hash {
+  join:  devicetype
+  {
+    type: left_outer
+    sql_on: ${beacondtuniquevisits_hash.devicetype} = ${devicetype.id} ;;
+    relationship: many_to_one
+  }
 
-# - explore: b2cemail
+  join:  pxcelclient
+  {
+    type: inner
+    sql_on: ${beacondtuniquevisits_hash.beaconid} = ${pxcelclient.beaconid} ;;
+    relationship: many_to_one
+  }
 
-# - explore: b2cfacebook
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
 
-# - explore: b2cindividual
+  join:  daysperiod
+  {
+    type: inner
+    sql_on: ${beacondtuniquevisits_hash.daynum} = ${daysperiod.id} ;;
+    relationship: many_to_one
+  }
 
-# - explore: beacondpuniquevisits
+  access_filter: {
+    field: client2lookeruser.userattribute
+    user_attribute: beacon2company
+  }
+}
 
-# - explore: beacondpuniquevisits_single
+explore: beaconvisits_hash {
 
-# - explore: beacondtuniquevisits
+  join:  pxcelclient
+  {
+    type: inner
+    sql_on: ${beaconvisits_hash.beaconid} = ${pxcelclient.beaconid} ;;
+    relationship: many_to_one
+  }
 
-# - explore: beacondtuniquevisits_hash
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
 
-# - explore: beacondtuniquevisits_single
+  join:  daysperiod
+  {
+    type: inner
+    sql_on: ${beaconvisits_hash.daynum} = ${daysperiod.id} ;;
+    relationship: many_to_one
+  }
 
-# - explore: beaconuniquedevices
+  access_filter: {
+    field: client2lookeruser.userattribute
+    user_attribute: beacon2company
+  }
+}
 
-# - explore: beaconvisits
+explore: beaconweeklyvisits_hash {
 
-# - explore: beaconvisits_hash
+  join:  pxcelclient
+  {
+    type: inner
+    sql_on: ${beaconweeklyvisits_hash.beaconid} = ${pxcelclient.beaconid} ;;
+    relationship: many_to_one
+  }
 
-# - explore: beaconvisits_single
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
 
-# - explore: beaconweeklyvisits
+  access_filter: {
+    field: client2lookeruser.userattribute
+    user_attribute: beacon2company
+  }
+}
 
-# - explore: beaconweeklyvisits_hash
+explore: lookermart_hash {
+  join:  devicetype
+  {
+    type: left_outer
+    sql_on: ${lookermart_hash.devicetype} = ${devicetype.id} ;;
+    relationship: many_to_one
+  }
 
-# - explore: beaconweeklyvisits_single
+  join:  pxcelclient
+  {
+    type: inner
+    sql_on: ${lookermart_hash.beaconid} = ${pxcelclient.beaconid} ;;
+    relationship: many_to_one
+  }
 
-# - explore: cityposition
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
 
-# - explore: client2lookeruser
+  join:  daysperiod
+  {
+    type: inner
+    sql_on: ${lookermart_hash.daynum} = ${daysperiod.id} ;;
+    relationship: many_to_one
+  }
 
-# - explore: daypart
+  access_filter: {
+    field: client2lookeruser.userattribute
+    user_attribute: beacon2company
+  }
+}
 
-# - explore: daysperiod
+explore: pxcelclient {
 
-# - explore: demosummary_single
+  join:  client2lookeruser
+  {
+    type: inner
+    sql_on: ${pxcelclient.clientname} = ${client2lookeruser.clientname} ;;
+    relationship: many_to_one
+  }
+}
 
-# - explore: devicetype
+explore: client2lookeruser {}
 
-# - explore: geotab
+explore: daysperiod {}
 
-# - explore: geovisits
-
-# - explore: geovisits_single
-
-# - explore: lookermart
-
-# - explore: lookermart_single
-
-# - explore: pxcelclient
-
-# - explore: pxcelclienttemp
-
-# - explore: regionposition
-
-# - explore: stateposition
-
-# - explore: stateregion
-
-# - explore: zip5position
-
-# - explore: zip9allvisits
-
-# - explore: zip9allvisits_single
-
-# - explore: zip9position
-
-# - explore: zip9position2
-
-# - explore: zipcitystate
-
-# - explore: zipvisits
-
-# - explore: zipvisits_single
+explore: devicetype {}
