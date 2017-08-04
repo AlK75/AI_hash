@@ -21,23 +21,23 @@ view: beaconweeklyvisits_hash {
     sql: ${TABLE}.unmatchedhashcount ;;
   }
 
-  dimension_group: weeknum {
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
+  dimension: weeknum {
+    type: date_week
     sql: ${TABLE}.weeknum ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
+  measure: count_MatchedEmails {
+    type: sum
+    sql:  ${TABLE}.matchedhashcount ;;
+  }
+
+  measure: count_UnmatchedEmails {
+    type: sum
+    sql:  ${TABLE}.unmatchedhashcount ;;
+  }
+
+  measure: count_UniqueEmails {
+    type: number
+    sql: ${count_MatchedEmails} + ${count_UnmatchedEmails} ;;
   }
 }
