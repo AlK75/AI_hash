@@ -14,6 +14,13 @@ view: beaconweeklyvisits_hash {
   dimension: siteid {
     type: string
     sql: ${TABLE}.siteid ;;
+    suggest_persist_for: "60 minutes"
+  }
+
+  dimension: pageid {
+    type: string
+    sql: ${TABLE}.pageid ;;
+    suggest_persist_for: "60 minutes"
   }
 
   dimension: unmatchedhashcount {
