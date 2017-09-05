@@ -40,35 +40,35 @@ view: demosummary_hash {
   }
 
   measure: usd_format {
-    type: sum
+    type: average
     hidden: yes
     value_format: "$#,##0"
     sql: ${TABLE}.result ;;
   }
 
   measure: perc_format {
-    type: sum
+    type: average
     hidden: yes
     value_format: "0.00\%"
     sql: ${TABLE}.result ;;
   }
 
   measure: age_format {
-    type: sum
+    type: average
     hidden: yes
     value_format: "0 \" years old\""
     sql: ${TABLE}.result ;;
   }
 
   measure: hhs_format {
-    type: sum
+    type: average
     hidden: yes
     value_format: "0.0 \" people\""
     sql: ${TABLE}.result ;;
   }
 
   measure: count_Result {
-    type: sum
+    type: average
     value_format: "0.00\%"
     sql:  ${TABLE}.result ;;
     html: {% if attribute._value contains "Age" %}
@@ -86,7 +86,7 @@ view: demosummary_hash {
   }
 
   measure: count_UsResult {
-    type: sum
+    type: average
     sql:  ${TABLE}.usresult ;;
     html: <font size="2" color="#228b22">{{ rendered_value }}</font> ;;
   }
