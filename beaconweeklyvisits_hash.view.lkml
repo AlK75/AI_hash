@@ -39,12 +39,12 @@ view: beaconweeklyvisits_hash {
   }
 
   measure: count_UnmatchedEmails {
-    type: sum
-    sql:  ${TABLE}.unmatchedhashcount ;;
+    type: number
+    sql:  ${count_UniqueEmails} - ${count_MatchedEmails} ;;
   }
 
   measure: count_UniqueEmails {
-    type: number
-    sql: ${count_MatchedEmails} + ${count_UnmatchedEmails} ;;
+    type: sum
+    sql:  ${TABLE}.unmatchedhashcount ;;
   }
 }
