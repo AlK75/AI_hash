@@ -55,6 +55,20 @@ explore: beaconvisits_hash {
   }
 }
 
+explore: beacondailyvisits_hash {
+  join:  awbeacon
+  {
+    type: inner
+    sql_on: ${beacondailyvisits_hash.beaconid} = ${awbeacon.beaconid} AND ${beacondailyvisits_hash.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_one
+  }
+
+  access_filter: {
+    field: awbeacon.userattribute
+    user_attribute: beacon2company
+  }
+}
+
 explore: beaconweeklyvisits_hash {
   join:  awbeacon
   {
