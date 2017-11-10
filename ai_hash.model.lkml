@@ -137,3 +137,26 @@ explore: demosummary_hash
   }
 
 }
+
+explore: alc {
+  join:  awbeacon
+  {
+    type: inner
+    sql_on: ${alc.beaconid} = ${awbeacon.beaconid} AND ${alc.siteid} = ${awbeacon.siteid}  ;;
+    relationship: many_to_one
+  }
+
+  join:  alc_email
+  {
+    type: left_outer
+    sql_on: ${alc.zip9} = ${alc_email.zip9} AND ${alc.emailid} = ${alc_email.emailid}  ;;
+    relationship: many_to_one
+  }
+
+  access_filter: {
+    field: awbeacon.userattribute
+    user_attribute: beacon2company
+  }
+}
+
+explore: alc_email {}
