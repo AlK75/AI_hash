@@ -90,6 +90,12 @@ view: alc {
     sql:  ${count_OC} + ${count_Rest} + ${count_HB} ;;
   }
 
+  measure: percent_HB {
+    type: number
+    value_format: "#.00\%"
+    sql: 100.00 * ${count_HB} / NULLIF(${count_notHBLaunched},0);;
+  }
+
   measure: count_UniqueHash {
     type: count_distinct
     sql: ${TABLE}.hashedemail ;;
