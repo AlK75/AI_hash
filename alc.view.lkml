@@ -101,6 +101,15 @@ view: alc {
     sql: ${TABLE}.hashedemail ;;
   }
 
+  measure: count_UniqueMultiHash {
+    type: count_distinct
+    sql: ${TABLE}.hashedemail ;;
+    filters: {
+      field: alc_multisitehashes.hashedemail
+      value: "-NULL"
+    }
+  }
+
   measure: count_growthUniqueHash {
     type: percent_of_previous
     sql: ${count_UniqueHash} ;;
@@ -115,17 +124,31 @@ view: alc {
     }
   }
 
-  measure: count_2mUniqueMatchedHash {
+  measure: count_UniqueMatchedMultiHash {
     type: count_distinct
     sql: ${TABLE}.hashedemail ;;
     filters: {
-      field: emailid
-      value: "NOT NULL"
+      field: alc_multisitehashes.ismatched
+      value: "Yes"
     }
-    filters: {
-      field: weeknum
-      value: "2 months"
-    }
+  }
+
+  measure: percent_Matched {
+    type: number
+    value_format: "#.00\%"
+    sql: 100.00 * ${count_UniqueMatchedHash} / NULLIF(${count_UniqueHash},0);;
+  }
+
+  measure: percent_MultiMatched {
+    type: number
+    value_format: "#.00\%"
+    sql: 100.00 * ${count_UniqueMatchedMultiHash} / NULLIF(${count_UniqueMultiHash},0);;
+  }
+
+  measure: percent_Multi {
+    type: number
+    value_format: "#.00\%"
+    sql: 100.00 * ${count_UniqueMultiHash} / NULLIF(${count_UniqueHash},0);;
   }
 
   measure: count_growthUniqueMatchedHash {
@@ -149,6 +172,19 @@ view: alc {
     filters: {
       field: alc_email.zip9matched
       value: "Yes"
+    }
+  }
+
+  measure: count_2mUniqueMatchedHash {
+    type: count_distinct
+    sql: ${TABLE}.hashedemail ;;
+    filters: {
+      field: emailid
+      value: "NOT NULL"
+    }
+    filters: {
+      field: weeknum
+      value: "2 months"
     }
   }
 

@@ -153,6 +153,13 @@ explore: alc {
     relationship: many_to_one
   }
 
+  join:  alc_multisitehashes
+  {
+    type: left_outer
+    sql_on: ${alc.hashedemail} = ${alc_multisitehashes.hashedemail}  ;;
+    relationship: many_to_one
+  }
+
   access_filter: {
     field: awbeacon.userattribute
     user_attribute: beacon2company
@@ -160,3 +167,5 @@ explore: alc {
 }
 
 explore: alc_email {}
+
+explore: alc_multisitehashes {}
