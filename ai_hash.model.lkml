@@ -160,6 +160,13 @@ explore: alc {
     relationship: many_to_one
   }
 
+  join:  alc_hb
+  {
+    type: left_outer
+    sql_on: ${alc.weeknum} = ${alc_hb.weeknum}  ;;
+    relationship: many_to_one
+  }
+
   access_filter: {
     field: awbeacon.userattribute
     user_attribute: beacon2company
@@ -169,3 +176,5 @@ explore: alc {
 explore: alc_email {}
 
 explore: alc_multisitehashes {}
+
+explore: alc_hb {}
