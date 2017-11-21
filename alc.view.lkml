@@ -124,6 +124,24 @@ view: alc {
     }
   }
 
+  measure: count_UniqueMatchedLaunchedHash {
+    type: count_distinct
+    sql: ${TABLE}.hashedemail ;;
+    filters: {
+      field: emailid
+      value: "NOT NULL"
+    }
+    filters: {
+      field: alc_email.status
+      value: "NOT NULL"
+    }
+  }
+
+  measure: count_UniqueMatchedUnlaunchedHash {
+    type: number
+    sql:  ${count_UniqueMatchedHash} - ${count_UniqueMatchedLaunchedHash};;
+  }
+
   measure: count_UniqueMatchedMultiHash {
     type: count_distinct
     sql: ${TABLE}.hashedemail ;;
