@@ -6,6 +6,14 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+datagroup: alc_datagroup {
+
+  sql_trigger: SELECT max(*) FROM alc ;;
+  max_cache_age: "24 hours"
+}
+
+persist_with: alc_datagroup
+
 explore: beacondtuniquevisits_hash {
   join:  awbeacon
   {
