@@ -8,7 +8,7 @@ include: "*.dashboard"
 
 datagroup: alc_datagroup {
 
-  sql_trigger: SELECT max(*) FROM alc ;;
+  sql_trigger: SELECT count(*) FROM alc ;;
   max_cache_age: "24 hours"
 }
 
